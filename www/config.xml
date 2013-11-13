@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.completel.extramobile" version="0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0"  xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>ExtraMobile</name>
+<widget id="com.completel.extramobile-static" version="0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0"  xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>ExtraMobile-static</name>
     <description>
         Completel ExtraMobile application
     </description>
