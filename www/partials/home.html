@@ -1,0 +1,746 @@
+<section ng-controller="HomeCtrl" ng-init="init()">
+
+	<div class="loader" ng-show="loader"></div>
+
+
+	<!-- Icône de deconnexion -->
+	<div id="logoutIcon" ng-show="(panel>1) || (panel < 0)">
+		<span class="glyphicon glyphicon-log-out" ng-click="logout()"> </span> 
+		<!-- {{userId}} -->
+	</div>
+
+	<!-- Footer de navigation des tickets -->
+	<div id="ticketNavFooter" ng-show="panel>1">
+		<div class=" btn-group btn-group-justified">
+			<a class="btn btn-default ticketNavFooterButton" role="button" ng-click="panel=2" ng-class="{greenFont:panel==2}"><div class="ticketNavFooterIconWrapper"><span class="glyphicon glyphicon-list"></span></div> Mes Tickets</a>
+			<a class="btn btn-default ticketNavFooterButton" role="button" ng-click="panel=3" ng-class="{greenFont:panel==3}"><div class="ticketNavFooterIconWrapper"><span class="glyphicon glyphicon-search"></span></div> Rechercher</a>
+			<a class="btn btn-default ticketNavFooterButton" role="button" ng-click="panel=4" ng-class="{greenFont:panel==4}"><div class="ticketNavFooterIconWrapper"><span class="glyphicon glyphicon-plus"></span></div> Nouveau</a>
+		</div>
+	</div>
+
+
+	<!-- Panel 0 : Navigation principale -->
+<!-- 	<section class="sectionPanel" ng-class="{center:panel==0, left:panel>0, right:panel<0}">
+		<header class="header">
+			Navigation
+		</header>
+
+		<div class="notHeader">		
+			<ul class="list-group">
+				<a class="list-group-item" ng-click="panel=2">Tickets  
+					<span class="floatRight glyphicon glyphicon-chevron-right arrowGlyph"></span>
+					<span class="badge">{{ticketsList.length}}</span>
+				</a>
+			</ul>
+		</div>
+	</section> -->
+
+	<!-- Panel admin -1 : Recherche clients-->
+	<section class="sectionPanel" ng-class="{center:panel==-1, left:panel!=-1}">	
+		<header class="header">
+			Recherche clients
+		</header>
+
+		<div class="notHeader">	
+			<form name="clientSearchForm" class="form-horizontal formPadding tabWithBottomBar31" role="form" ng-submit="searchClientSubmit()">
+
+
+				<div class="form-group">
+					<label for="loginRechercheClient" class="col-xs-3 control-label">Login</label>
+					<div class="col-xs-9">
+						<input type="text" class="form-control" id="loginRechercheClient" ng-model="loginRechercheClient" placeholder="Login">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="nomRechercheClient" class="col-xs-3 control-label">Nom</label>
+					<div class="col-xs-9">
+						<input type="text" class="form-control" id="nomRechercheClient" ng-model="nomRechercheClient" placeholder="Nom">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="prenomRechercheClient" class="col-xs-3 control-label">Prenom</label>
+					<div class="col-xs-9">
+						<input type="text" class="form-control" id="prenomRechercheClient" ng-model="prenomRechercheClient" placeholder="Prenom">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="societeRechercheClient" class="col-xs-3 control-label">Société</label>
+					<div class="col-xs-9">
+						<select class="form-control " id="societeRechercheClient" ng-model="societeRechercheClient">
+							<option value="1">ProxiAD</option>
+							<option value="2">Complétel</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="utilisateurRechercheClient" class="col-xs-3 control-label">Utilisateur</label>
+					<div class="col-xs-9">
+						<select class="form-control " id="utilisateurRechercheClient" ng-model="utilisateurRechercheClient">
+							<option value="1">User 1</option>
+							<option value="2">User 2</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="bottomBar31">
+					<button type="button" class="btn btn-primary btn-sm col-xs-6" ng-click="searchClientReset()">Effacer</button>
+					<button type="submit" ng-disabled="clientSearchForm.$invalid" class="btn btn-primary btn-sm col-xs-6">Rechercher</button>
+				</div>
+
+			</form>
+		</div>
+	</section>
+
+	<!-- Panel admin -2 : Résultats Recherche clients-->
+	<section class="sectionPanel" ng-class="{center:panel==-2, right:panel!=-2}">	
+		<header class="header">
+			Gestion clients
+			<a class="back glyphicon glyphicon-arrow-left" ng-click="panel=-1"></a>
+		</header>
+
+		<div class="notHeader">	
+			<div class="ticketRow col-xs-12" ng-repeat="user in searchUsersList">
+				<input type="hidden" class="ticketId" value="{{user.id_utilisateur}}"/>
+
+				<div class="typeUtilisateur col-xs-2" >
+					<div class="glyphicon" ng-class="{etatAdministrateur:isAdmin(user),'glyphicon-tower':isAdmin(user), etatGestionnaire:isGestionnaire(user), 'glyphicon-stats':isGestionnaire(user), etatUtilisateur:isUtilisateur(user), 'glyphicon-user':isUtilisateur(user)}"></div>
+				</div>
+				<div class="prenomNom col-xs-10 ">{{user.prenom}} {{user.nom}}</div>
+
+				<div class="email col-xs-10 ">{{user.email}}</div>
+				<div class="arrowGlyphDiv col-xs-1">
+					<span class="glyphicon floatRight glyphicon-chevron-right arrowGlyph arrowGlyph60"></span>
+				</div>
+
+
+			</div>
+		</div>
+	</section>
+
+	<!-- Panel 2 : Liste des tickets -->
+	<section class="sectionPanel sectionPanelWithFooter" ng-class="{center:panel==2, right:panel<2, left:panel>2}">	
+
+		<header class="header">
+			Liste Tickets
+		</header>
+
+		<div class="notHeader">
+			<ul id="ticketListNavBar" class="nav nav-pills">
+				<li class="active">
+					<a data-target="#ticketTabOuverts" data-toggle="tab" ng-show="ticketsListOuverts.length > 0">Ouverts</a> 
+					<a class="navTabNoTicket" ng-show="ticketsListOuverts.length == 0">Ouverts</a>
+				</li>
+				<li>
+					<a data-target="#ticketTabGeles" data-toggle="tab" ng-show="ticketsListGeles.length > 0">Gelés</a> 
+					<a class="navTabNoTicket" ng-show="ticketsListGeles.length == 0">Gelés</a>
+				</li>
+				<li>
+					<a data-target="#ticketTabResolus" data-toggle="tab" ng-show="ticketsListResolus.length > 0">Résolus</a>
+					<a class="navTabNoTicket" ng-show="ticketsListResolus.length == 0">Résolus</a>
+				</li>
+				<li>
+					<a data-target="#ticketTabClos" data-toggle="tab" ng-show="ticketsListClos.length > 0">Clos</a>
+					<a class="navTabNoTicket" ng-show="ticketsListClos.length == 0">Clos</a>
+				</li>
+			</ul>
+			<form id="ticketListForm" class="form-horizontal" role="form">
+				<div class="tab-content">
+
+					<!-- Onglet : Tickets ouverts -->
+					<div id="ticketTabOuverts" class="tab-pane active">
+						<div class="ticketRow col-xs-12" ng-repeat="ticket in ticketsListOuverts" ng-click="ticketDetails($event)">
+							<input type="hidden" class="ticketId" value="{{ticket.noTicket}}"/>
+
+							<!-- 							<div class="etat col-xs-2" >
+								<div class="glyphicon glyphicon-flag" ng-class="{etatTrue:ticket.etat==1, etatFalse:ticket.etat==0}"></div>
+							</div> -->
+							<div class="numero col-xs-6">N°{{ticket.noTicket}}</div>
+							<div class="date col-xs-6">{{ticket.dateAppel | date:'dd/MM'}}</div>
+
+							<div class="arrowGlyphDiv col-xs-1">
+								<span class="glyphicon floatRight glyphicon-chevron-right arrowGlyph arrowGlyph60"></span>
+							</div>
+
+							<div class="description col-xs-12 ">{{ticket.symptome}}</div>
+
+						</div>
+					</div>
+
+					<!-- Onglet : Tickets gelés -->
+					<div id="ticketTabGeles" class="tab-pane">
+						<div class="ticketRow col-xs-12" ng-repeat="ticket in ticketsListGeles" ng-click="ticketDetails($event)">
+							<input type="hidden" class="ticketId" value="{{ticket.noTicket}}"/>
+
+							<!-- 							<div class="etat col-xs-2" >
+								<div class="glyphicon glyphicon-flag" ng-class="{etatTrue:ticket.etat==1, etatFalse:ticket.etat==0}"></div>
+							</div> -->
+							<div class="numero col-xs-6">N°{{ticket.noTicket}}</div>
+							<div class="date col-xs-6">{{ticket.dateAppel | date:'dd/MM'}}</div>
+
+							<div class="arrowGlyphDiv col-xs-1">
+								<span class="glyphicon floatRight glyphicon-chevron-right arrowGlyph arrowGlyph60"></span>
+							</div>
+
+							<div class="description col-xs-12">{{ticket.symptome}}</div>
+
+						</div>
+					</div>
+
+					<!-- Onglet : Tickets résolus -->
+					<div id="ticketTabResolus" class="tab-pane">
+						<div class="ticketRow col-xs-12" ng-repeat="ticket in ticketsListResolus" ng-click="ticketDetails($event)">
+							<input type="hidden" class="ticketId" value="{{ticket.noTicket}}"/>
+
+								<!-- 							<div class="etat col-xs-2" >
+								<div class="glyphicon glyphicon-flag" ng-class="{etatTrue:ticket.etat==1, etatFalse:ticket.etat==0}"></div>
+							</div> -->
+							<div class="numero col-xs-6">N°{{ticket.noTicket}}</div>
+							<div class="date col-xs-6">{{ticket.dateAppel | date:'dd/MM'}}</div>
+
+							<div class="arrowGlyphDiv col-xs-1">
+								<span class="glyphicon floatRight glyphicon-chevron-right arrowGlyph arrowGlyph60"></span>
+							</div>
+
+							<div class="description col-xs-12">{{ticket.symptome}}</div>
+
+						</div>
+					</div>
+
+					<!-- Onglet : Tickets clos -->
+					<div id="ticketTabClos" class="tab-pane">
+						<div class="ticketRow col-xs-12" ng-repeat="ticket in ticketsListClos" ng-click="ticketDetails($event)">
+							<input type="hidden" class="ticketId" value="{{ticket.noTicket}}"/>
+
+							<!-- 							<div class="etat col-xs-2" >
+								<div class="glyphicon glyphicon-flag" ng-class="{etatTrue:ticket.etat==1, etatFalse:ticket.etat==0}"></div>
+							</div> -->
+							<div class="numero col-xs-6">N°{{ticket.noTicket}}</div>
+							<div class="date col-xs-6">{{ticket.dateAppel | date:'dd/MM'}}</div>
+
+							<div class="arrowGlyphDiv col-xs-1">
+								<span class="glyphicon floatRight glyphicon-chevron-right arrowGlyph arrowGlyph60"></span>
+							</div>
+
+							<div class="description col-xs-12">{{ticket.symptome}}</div>
+
+						</div>
+					</div>
+
+				</div>
+			</form>
+		</div>
+
+	</section>
+
+	<!-- Panel 3 : Recherche de tickets -->
+	<section class="sectionPanel sectionPanelWithFooter" ng-class="{center:panel==3, right:panel!=3}">	
+
+		<header class="header">
+			Recherche Tickets
+			<a class="back glyphicon glyphicon-arrow-left" ng-click="panel=2"></a>
+		</header>
+
+		<div class="notHeader">
+			<form  class="form-horizontal formPadding tabWithBottomBar31" role="form" ng-submit="searchTicketsSubmit()">
+				<div class="form-group">
+					<label for="categorie" class="col-xs-4 control-label">Catégorie</label>
+					<div class="col-xs-8">
+						<select class="form-control " id="categorie" ng-model="categorieRechercheTicket">
+							<option value="1">Technique</option>
+							<option value="2">Administratif</option>
+						</select>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label class="col-xs-4 control-label">Etats</label>
+					<div class="col-xs-8">
+
+						<div class="col-xs-5">
+							<label class="checkbox-inline">
+								<input type="checkbox" id="cbOuvert" ng-model="cbOuvertRechercheTicket"> Ouvert
+							</label>
+						</div>
+						<div class="col-xs-5">
+							<label class="checkbox-inline">
+								<input type="checkbox" id="cbGele" ng-model="cbGeleRechercheTicket"> Gelé
+							</label>
+						</div>
+						<div class="col-xs-5">
+							<label class="checkbox-inline">
+								<input type="checkbox" id="cbResolu" ng-model="cbResoluRechercheTicket"> Résolu
+							</label>
+						</div>
+						<div class="col-xs-5">
+							<label class="checkbox-inline">
+								<input type="checkbox" id="cbClos" ng-model="cbClosRechercheTicket"> Clos
+							</label>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="societe" class="col-xs-4 control-label">Société</label>
+					<div class="col-xs-8">
+						<select class="form-control " id="societe" ng-model="societeRechercheTicket">
+							<option value="1">ProxiAD</option>
+							<option value="2">Complétel</option>
+						</select>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="numeroTicket" class="col-xs-4 control-label">N° Ticket</label>
+					<div class="col-xs-8">
+						<input type="text" class="form-control" id="numeroTicket" ng-model="numeroTicketRechercheTicket" placeholder="Numéro Ticket">
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="priorite" class="col-xs-4 control-label">Priorité</label>
+					<div class="col-xs-8">
+						<select class="form-control " id="priorite" ng-model="prioriteRechercheTicket">
+							<option value="1">Priorite 1</option>
+							<option value="2">Priorité 2</option>
+						</select>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="proActivite" class="col-xs-4 control-label">ProActivité</label>
+					<div class="col-xs-8">
+						<label class="checkbox-inline">
+							<input type="checkbox" id="proActivite" ng-model="proActiviteRechercheTicket">
+						</label>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="refClient" class="col-xs-4 control-label">Réf client</label>
+					<div class="col-xs-8">
+						<input type="text" class="form-control" id="refClient" placeholder="Ref client" ng-model="refClientRechercheTicket">
+					</div>
+				</div>
+
+
+				<div class="bottomBar31">
+					<button type="button" class="btn btn-primary btn-sm col-xs-6" ng-click="searchTicketsReset()">Effacer</button>
+					<button type="submit" class="btn btn-primary btn-sm col-xs-6">Rechercher</button>
+				</div>
+
+
+			</form>
+		</div>
+
+	</section>
+
+	<!-- Panel 4 : Création de tickets, ecran 1 -->
+	<section class="sectionPanel sectionPanelWithFooter" ng-class="{center:panel==4, right:panel!=4}">	
+		<header class="header">
+			Nouveau Ticket
+			<a class="back glyphicon glyphicon-arrow-left" ng-click="panel=2"></a>
+		</header>
+
+		<div class="notHeader">		
+			<form name="ticketCreationFormStep1" class="form-horizontal formPadding tabWithBottomBar31" role="form" ng-submit="createTicketSubmitStep1()">
+
+				<div class="form-group">
+					<label for="categorieNouveauTicket" class="col-xs-4 control-label">Catégorie</label>
+					<div class="col-xs-8">
+						<select class="form-control " id="categorieNouveauTicket" ng-model="categorieNouveauTicket">
+							<option value="1">Technique</option>
+							<option value="2">Administratif</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group" ng-show="categorieNouveauTicket==1">
+					<label for="referenceNouveauTicket" class="col-xs-4 control-label">Référence*</label>
+					<div class="col-xs-8">
+						<input type="text" ng-required="categorieNouveauTicket==1" class="form-control" id="referenceNouveauTicket" ng-model="referenceNouveauTicket" placeholder="Référence">
+					</div>
+				</div>
+				
+				<div class="form-group" ng-show="categorieNouveauTicket==2">
+					<label for="siteNouveauTicket" class="col-xs-4 control-label">Site*</label>
+					<div class="col-xs-8">
+						<input type="text" ng-required="categorieNouveauTicket==2" class="form-control" id="siteNouveauTicket" ng-model="siteNouveauTicket" placeholder="Site">
+					</div>
+				</div>
+
+				<div class="bottomBar31">
+					<button type="button" class="btn btn-primary btn-sm col-xs-6" ng-Click="panel=2">Annuler</button>
+					<button type="submit" ng-disabled="ticketCreationFormStep1.$invalid" class="btn btn-primary btn-sm col-xs-6">Suivant</button>
+				</div>
+
+			</form>
+		</div>
+	</section>
+
+	<!-- Panel 4.5 : Création de tickets, écran 2 -->
+	<section class="sectionPanel sectionPanelWithFooter" ng-class="{center:panel==4.5, right:panel!=4.5}">	
+		<header class="header">
+			Nouveau Ticket
+			<a class="back glyphicon glyphicon-arrow-left" ng-click="panel=4"></a>
+		</header>
+
+		<div class="notHeader">	
+			<form name="ticketCreationFormStep2" class="form-horizontal formPadding tabWithBottomBar31" role="form" ng-submit="createTicketSubmitStep2()">
+
+				<div class="form-group">
+					<label for="categorieNouveauTicket" class="col-xs-4 control-label">Catégorie</label>
+					<div class="col-xs-8">
+						<select class="form-control " id="categorieNouveauTicket" ng-model="categorieNouveauTicket" ng-readonly="true">
+							<option value="1">Technique</option>
+							<option value="2">Administratif</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group" ng-show="categorieNouveauTicket==1">
+					<label for="referenceNouveauTicket" class="col-xs-4 control-label">Référence* (validée)</label>
+					<div class="col-xs-8">
+						<input type="text" ng-required="categorieNouveauTicket==1"  class="form-control" id="referenceNouveauTicket" ng-model="referenceNouveauTicket" placeholder="Référence" ng-readonly="true">
+					</div>
+				</div>
+
+				<div class="form-group" ng-show="categorieNouveauTicket==2">
+					<label for="siteNouveauTicket" class="col-xs-4 control-label">Site* (validé)</label>
+					<div class="col-xs-8">
+						<input type="text" ng-required="categorieNouveauTicket==2"  class="form-control" id="siteNouveauTicket" ng-model="siteNouveauTicket" placeholder="Site" ng-readonly="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="siteNouveauTicket" class="col-xs-4 control-label"></label>
+					<div class="col-xs-8">
+						<button type="button" class="btn btn-primary btn-sm col-xs-6" ng-Click="panel=4">Modifier</button>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="numeroTicketNouveauTicket" class="col-xs-4 control-label">N° Ticket*</label>
+					<div class="col-xs-8">
+						<input type="text" required class="form-control" id="numeroTicketNouveauTicket" ng-model="numeroTicketNouveauTicket" placeholder="Numéro Ticket">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="nomNouveauTicket" class="col-xs-4 control-label">Nom*</label>
+					<div class="col-xs-8">
+						<input type="text" required class="form-control" id="nomNouveauTicket" ng-model="nomNouveauTicket" placeholder="Nom">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="telNouveauTicket" class="col-xs-4 control-label">Tel*</label>
+					<div class="col-xs-8">
+						<input type="text" required class="form-control" id="telNouveauTicket" ng-model="telNouveauTicket" placeholder="Tel">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="signalisationNouveauTicket" class="col-xs-4 control-label">Signalisation*</label>
+					<div class="col-xs-8">
+						<select required class="form-control" id="signalisationNouveauTicket" ng-model="signalisationNouveauTicket">
+							<option value="1">Aucune</option>
+							<option value="2">Dégradation critique</option>
+							<option value="3">Dégradation</option>
+							<option value="4">Coupure totale de service</option>
+							<option value="5">Demande de modification</option>
+							<option value="6">Vérification du service</option>
+							<option value="7">CR incident ou RFO</option>
+							<option value="8">Demande d'action</option>
+							<option value="9">Demande d'info</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group" ng-show="categorieNouveauTicket==1">
+					<label for="equipementsRedemarres" class="col-xs-4 control-label">Equipements redémarrés</label>
+					<div class="col-xs-8">
+						<label class="checkbox-inline">
+							<input type="checkbox" id="equipementsRedemarresNouveauTicket" ng-model="equipementsRedemarresNouveauTicket">
+						</label>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="symptomesNouveauTicket" class="col-xs-4 control-label">Symptômes*</label>
+					<div class="col-xs-8">
+						<textarea required class="form-control"  id="symptomesNouveauTicket" ng-model="symptomesNouveauTicket"  rows="3"></textarea>
+					</div>
+				</div>
+
+
+				<div class="bottomBar31">
+					<button type="button" class="btn btn-primary btn-sm col-xs-6" ng-Click="panel=2">Annuler</button>
+					<button type="submit" ng-disabled="ticketCreationFormStep2.$invalid" class="btn btn-primary btn-sm col-xs-6">Créer</button>
+				</div>
+			</form>
+		</div>
+	</section>
+
+	<!-- Panel 5 : Détails des tickets -->
+	<section class="sectionPanel sectionPanelWithFooter" ng-class="{center:panel==5, right:panel<5, left:panel>5}">	
+
+		<header class="header">
+			Détails d'un ticket
+			<a class="back glyphicon glyphicon-arrow-left" ng-click="panel=2"></a>
+		</header>
+
+		<div class="notHeader consultation">		
+
+			<ul id="ticketDetailsNavBar" class="nav nav-pills" ng-class="{width20percent:(currentTicket.etat == 'clos') || (currentTicket.etat == 'resolu'), width25percent:(currentTicket.etat != 'clos') && (currentTicket.etat != 'resolu')}">
+				<li class="active" >
+					<a data-target="#infosTab" data-toggle="tab">Infos</a>
+				</li>
+				<li>
+					<a data-target="#ticketTab" data-toggle="tab">Ticket</a>
+				</li>
+				<li>
+					<a data-target="#descTab" data-toggle="tab">Desc</a>
+				</li>
+				<li>
+					<a data-target="#solutionTab" data-toggle="tab" ng-show="(currentTicket.etat == 'clos') || (currentTicket.etat == 'resolu')">Solution</a>
+				</li>
+				<li>
+					<a data-target="#actionTab" data-toggle="tab">Action</a>
+				</li>
+			</ul>
+			<form class="form-horizontal" role="form">
+				<div class="tab-content">
+
+					<!-- Onglet : Infos -->
+					<div id="infosTab" class="tab-pane formStyle active col-xs-12">
+						<div class="form-group">
+							<label for="referenceDetailsTicket" class="col-xs-4 control-label">Référence</label>
+							<div id="referenceDetailsTicket" class="col-xs-8">
+								<p class="form-control-static">{{currentTicket.refTicketClient}}</p>
+							</div>
+						</div>
+
+						<hr/>
+
+						<div class="form-group">
+							<label for="clientDetailsTicket" class="col-xs-4 control-label">Client</label>
+							<div id="clientDetailsTicket" class="col-xs-8">
+								<p class="form-control-static">Nom client ??</p>
+							</div>
+						</div>
+
+						<hr/>
+
+						<div class="form-group">
+							<label for="societeDetailsTicket" class="col-xs-4 control-label">Société</label>
+							<div id="societeDetailsTicket" class="col-xs-8">
+								<p class="form-control-static">{{currentTicket.societe}}</p>
+							</div>
+						</div>
+
+						<hr/>
+
+						<div class="form-group">
+							<label for="siteDetailsTicket" class="col-xs-4 control-label">Site</label>
+							<div id="siteDetailsTicket" class="col-xs-8">
+								<p class="form-control-static">{{currentTicket.site}}</p>
+							</div>
+						</div>
+
+						<hr/>
+
+						<div class="form-group">
+							<label for="numeroRefDetailsTicket" class="col-xs-4 control-label">N° ref</label>
+							<div id="numeroRefDetailsTicket" class="col-xs-8">
+								<p class="form-control-static">{{currentTicket.reference}}</p>
+							</div>
+						</div>
+
+						<hr/>
+
+						<div class="form-group">
+							<label for="categorieDetailsTicket" class="col-xs-4 control-label">Catégorie</label>
+							<div id="categorieDetailsTicket" class="col-xs-8">
+								<p class="form-control-static">{{currentTicket.categorie}}</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- Onglet : Ticket -->
+					<div id="ticketTab" class="tab-pane formStyle col-xs-12">
+						<div class="form-group">
+							<label for="numeroAppelDetailsTicket" class="col-xs-4 control-label">N° d'appel</label>
+							<div id="numeroAppelDetailsTicket" class="col-xs-8">
+								<p class="form-control-static">{{currentTicket.noTicket}}</p>
+							</div>
+						</div>
+
+						<hr/>
+
+						<div class="form-group">
+							<label for="etatDetailsTicket" class="col-xs-4 control-label">Etat</label>
+							<div id="etatDetailsTicket" class="col-xs-8">
+								<p class="form-control-static">{{currentTicket.etat}}</p>
+							</div>
+						</div>
+
+						<hr/>
+
+						<div class="form-group">
+							<label for="ouvertureDetailsTicket" class="col-xs-4 control-label">Ouverture</label>
+							<div id="ouvertureDetailsTicket" class="col-xs-8">
+								<p class="form-control-static">{{currentTicket.dateAppel | date:'dd/MM/yyyy'}}</p>
+							</div>
+						</div>
+
+						<hr/>
+
+						<div class="form-group">
+							<label for="clotureDetailsTicket" class="col-xs-4 control-label">Cloture</label>
+							<div id="clotureDetailsTicket" class="col-xs-8">
+								<p class="form-control-static">{{currentTicket.dateCloture | date:'dd/MM/yyyy'}}</p>
+							</div>
+						</div>
+
+						<hr/>
+
+						<div class="form-group">
+							<label for="dureeDetailsTicket" class="col-xs-4 control-label">Durée</label>
+							<div id="dureeDetailsTicket" class="col-xs-8">
+								<p class="form-control-static">{{(currentTicket.dateCloture - currentTicket.dateAppel) | date:"d'j'"}}</p>
+							</div>
+						</div>
+
+						<hr/>
+
+						<div class="form-group">
+							<label for="signalisationDetailsTicket" class="col-xs-4 control-label">Signalisation</label>
+							<div id="signalisationDetailsTicket" class="col-xs-8">
+								<p class="form-control-static">{{currentTicket.signalisation}}</p>
+							</div>
+						</div>
+
+						<hr/>
+
+						<div class="form-group">
+							<label for="prioriteDetailsTicket" class="col-xs-4 control-label">Priorité</label>
+							<div id="prioriteDetailsTicket" class="col-xs-8">
+								<p class="form-control-static">{{currentTicket.priorite}}</p>
+							</div>
+						</div>
+
+						<hr/>
+
+						<div class="form-group">
+							<label for="proactiviteDetailsTicket" class="col-xs-4 control-label">ProActivité</label>
+							<div id="proactiviteDetailsTicket" class="col-xs-8">
+								<p class="form-control-static"><input type="checkbox" disabled="true" id="proActivite" ng-model="currentTicket.proactivite"></p>
+							</div>
+						</div>
+					</div>
+
+					<!-- Onglet : Desc -->
+					<div id="descTab" class="tab-pane formStyle col-xs-12">
+						<div class="form-group">
+							{{currentTicket.symptome}}
+						</div>
+					</div>
+
+					<div id="solutionTab" class="tab-pane formStyle col-xs-12">
+						<div class="form-group">
+							{{currentTicket.solution}}
+						</div>
+					</div>
+
+					<!-- Onglet : Action -->
+					<div id="actionTab" class="tab-pane tabWithBottomBar31">
+						<div class="actionRow col-xs-12" ng-repeat="action in currentTicket.tableauAction" ng-click="actionDetails($event)">
+							<div class="actionDate col-xs-6 ">{{action.date | date:'dd/MM/yyyy'}}</div>
+							<div class="actionTime col-xs-6 ">{{action.date | date:'HH:mm:ss'}}</div>
+							<div class="arrowGlyphDiv col-xs-1">
+								<span class="glyphicon floatRight glyphicon-chevron-down arrowGlyph arrowGlyph60"></span>
+							</div> 
+							<div class="actionCommentaireClass actionCommentaire col-xs-12">{{action.commentaire}}</div>
+						</div>
+
+						<div class="bottomBar31">
+							<input type="button" class="btn btn-primary btn-sm btn-block noRoundBorder" value="Ajouter une action" ng-click="panel=7" ng-show="(currentTicket.etat == 'ouvert')">
+						</div>
+
+
+						<script type="text/javascript">
+
+						</script>
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</section>
+
+
+	<!-- Panel 6 : Détails d'une action -->
+<!-- 	<section class="sectionPanel sectionPanelWithFooter" ng-class="{center:panel==6, right:panel!=6}">	
+		<header class="header">
+			Action
+			<a class="back glyphicon glyphicon-arrow-left" ng-click="panel=5"></a>
+		</header>
+
+		<div class="notHeader">	
+
+			<div class="actionDate col-xs-6 ">{{actionDate}}</div>
+			<div class="actionTime col-xs-6 ">{{actionTime}}</div>
+			<div class="actionCommentaireDetailed col-xs-12 ">{{actionCommentaire}}</div>
+
+		</div>
+	</section> -->
+
+
+	<!-- Panel 7 : Ajout d'actions-->
+	<section class="sectionPanel sectionPanelWithFooter" ng-class="{center:panel==7, right:panel<7}">	
+		<header class="header">
+			Ajouter action
+			<a class="back glyphicon glyphicon-arrow-left" ng-click="panel=5"></a>
+		</header>
+
+		<div class="notHeader">		
+			<form name="actionCreationForm" class="form-horizontal formPadding tabWithBottomBar31 " role="form" ng-submit="createActionSubmit()">
+
+				<div class="form-group">
+					<label for="typeNouvelleAction" class="col-xs-3 control-label">Type*</label>
+					<div class="col-xs-9">
+						<select class="form-control" name="typeNouvelleAction" required id="typeNouvelleAction" ng-model="typeNouvelleAction">
+							<option value="1">Commentaire</option>
+							<option value="2">Demande de clôture</option>
+						</select>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="commentaireNouvelleAction" class="col-xs-3 control-label">Symptômes*</label>
+					<div class="col-xs-9">
+						<textarea class="form-control" required  id="commentaireNouvelleAction" ng-model="commentaireNouvelleAction"  rows="5"></textarea>
+					</div>
+				</div>
+
+				<div class="bottomBar31">
+					<button type="button" class="btn  btn-primary btn-sm col-xs-6" ng-Click="panel=5">Annuler</button>	
+					<button type="submit" ng-disabled="actionCreationForm.$invalid" class="btn btn-primary btn-sm col-xs-6">Ajouter</button>
+				</div>
+
+
+			</form>
+		</div>
+	</section>
+
+</section>

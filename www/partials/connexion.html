@@ -1,0 +1,44 @@
+<section ng-controller="ConnexionCtrl" ng-init="checkRememberMe()">
+
+	<div class="loader" ng-show="loader"></div>
+
+	<section class="panel">
+
+		<header class="header connexionHeader">
+		</header>
+
+		<div class="notHeaderConnexion">		
+			
+
+
+			<form ng-submit="connect()" name="connexionForm" class="form-signin">
+
+				<div id="welcome">Bienvenue sur l'application extranet Completel</div>
+
+				<h4 class="form-signin-heading">Connexion</h4>
+
+
+				<input type="text" class="form-control" required id="login" placeholder="Login" ng-model="login">
+
+				<input type="password" class="form-control" required id="pw" placeholder="Mot de passe" ng-model="password">
+
+				<div class="form-group">
+					<label for="rememberme">
+						<input type="checkbox" id="rememberme" ng-model="rememberme"> Mémoriser mon identifiant
+					</label>
+				</div>
+				<p>
+					<input type="submit" ng-disabled="connexionForm.$invalid" class="btn btn-primary btn-lg btn-block" value="Connexion">
+				</p>
+			</form>
+
+		</div>
+
+		<!-- Footer Mentions légales et version -->
+		<div id="connexionFooter">
+			<div class="floatLeft connexionFooterDiv paddingLeft5">© extranet Completel</div>
+			<div class="floatRight connexionFooterDiv paddingRight5">V 0.1</div>
+		</div>
+	</section>
+
+</section>

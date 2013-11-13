@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.completel.extramobile" version="0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0"  xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>ExtraMobile</name>
+    <description>
+        Completel ExtraMobile application
+    </description>
+    <author email="dev@callback.apache.org" href="http://cordova.io">
+        Proxiad team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <preference name="fullscreen" value="true" />
+    <preference name="UIWebViewBounce" value="false" />
+
+    <icon src="Ressources/splash/icon.png"/>
+
+    <gap:splash gap:density="ldpi" gap:platform="android" src="Ressources/splash/small.png" />
+    <gap:splash gap:density="mdpi" gap:platform="android" src="Ressources/splash/medium.png" />
+    <gap:splash gap:density="hdpi" gap:platform="android" src="Ressources/splash/large.png" />
+    <gap:splash gap:density="xhdpi" gap:platform="android" src="Ressources/splash/xlarge.png" />
+    <gap:splash gap:platform="blackberry" src="Ressources/splash/medium.png" />
+    <gap:splash gap:platform="ios" height="480" src="Ressources/splash/medium.png" width="320" />
+    <gap:splash gap:platform="ios" height="960" src="Ressources/splash/large.png" width="640" />
+    <gap:splash gap:platform="ios" height="1024" src="Ressources/splash/xlarge.png" width="768" />
+    <gap:splash gap:platform="ios" height="768" src="Ressources/splash/xlarge.png" width="1024" />
+    <gap:splash gap:platform="winphone" src="Ressources/splash/medium.png" />
+
+</widget>
+
+
+
+

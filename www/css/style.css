@@ -1,0 +1,666 @@
+/*Twitter bootstrap overload*/
+.btn-primary.disabled, .btn-primary[disabled], fieldset[disabled] .btn-primary, .btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover, .btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus, .btn-primary.disabled:active, .btn-primary[disabled]:active, fieldset[disabled] .btn-primary:active, .btn-primary.disabled.active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary.active {
+    background-color: #99aa03 !important;
+    border-color: #b7ca15  !important;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+    color: #ffffff !important;
+    background-color: #99aa03 !important;
+    border-color: #b7ca15  !important;
+}
+
+.btn-primary {
+    background-color: #99aa03 !important;
+    background-image: -webkit-gradient(linear, left top, left bottom, from( #b7ca15), to(#99aa03)) !important; /* Chrome, Safari 4+ */
+    background-image: -webkit-linear-gradient(top, #b7ca15, #99aa03) !important; /* Chrome 10-25, iOS 5+, Safari 5.1+ */
+    background-image:    -moz-linear-gradient(top, #b7ca15, #99aa03) !important; /* Firefox 3.6-15 */
+    background-image:      -o-linear-gradient(top, #b7ca15, #99aa03) !important; /* Opera 11.10-12.00 */
+    background-image:         linear-gradient(to bottom, #b7ca15, #99aa03) !important; /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+    border-color: #b7ca15  !important;
+}
+
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: #ffffff !important;
+    /*border-bottom: 5px #ce581b solid !important;*/
+    border-bottom: 5px #333 solid !important;
+    background-color: inherit   !important;
+
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: inherit !important;
+}
+
+.consultation .form-group { 
+    margin-top: 4px !important;
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+    /*border-radius: 10px;*/
+    /*background-color: white !important;*/
+    /*border: 1px solid #EEE;*/
+    margin-bottom: 4px !important;
+    font-size: 12px !important;
+}
+
+.consultation .tab-pane .form-group:first-child {
+    /*margin-top: 15px !important;*/
+}
+
+.consultation .form-group label {
+ padding-top: 4px !important;
+}
+
+.consultation .form-group div > p {
+   padding-top: 3px !important;
+}
+
+/*End of Twitter Bootstrap overload*/
+
+
+
+.consultation .tab-pane.formStyle {
+    border-radius: 10px;
+    background-color: white !important;
+    border: 1px solid #EEE;
+    margin-top: 15px;
+}
+
+.consultation .tab-pane.formStyle hr {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+
+    border: 0;
+    height: 1px;
+    margin:18px 0;
+    position:relative;
+    background: -moz-linear-gradient(left, rgba(100,100,100,0) 0%, rgba(100,100,100,0) 10%, rgba(100,100,100,0.65) 50%, rgba(100,100,100,0) 90%, rgba(100,100,100,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(100,100,100,0)), color-stop(10%,rgba(100,100,100,0)), color-stop(50%,rgba(100,100,100,0.65)), color-stop(90%,rgba(100,100,100,0)), color-stop(100%,rgba(100,100,100,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, rgba(100,100,100,0) 0%,rgba(100,100,100,0) 10%,rgba(100,100,100,0.65) 50%,rgba(100,100,100,0) 90%,rgba(100,100,100,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgba(100,100,100,0) 0%,rgba(100,100,100,0) 10%,rgba(100,100,100,0.65) 50%,rgba(100,100,100,0) 90%,rgba(100,100,100,0) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgba(100,100,100,0) 0%,rgba(100,100,100,0) 10%,rgba(100,100,100,0.65) 50%,rgba(100,100,100,0) 90%,rgba(100,100,100,0) 100%); /* IE10+ */
+    background: linear-gradient(left, rgba(100,100,100,0) 0%,rgba(100,100,100,0) 10%,rgba(100,100,100,0.65) 50%,rgba(100,100,100,0) 90%,rgba(100,100,100,0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
+}
+
+
+.consultation .tab-pane.formStyle hr:before {
+    content: "";
+    display: block;
+    border-top: solid 1px #f9f9f9;
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+}
+
+.paddingLeft5 {
+    padding-left: 5px;
+}
+
+.paddingRight5 {
+    padding-right: 5px;
+}
+
+#welcome {
+    font-size: 22px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.form-control:focus {
+    border-color: #f58134 !important;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+.form-signin .checkbox {
+    font-weight: normal;
+}
+.form-signin .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.floatRight {
+    float:right !important;
+}
+
+.floatLeft {
+    float:left !important;
+}
+
+.arrowGlyph {
+    font-weight: 100;
+    font-size: small;
+}
+
+.arrowGlyphDiv {
+    height: 50px;
+    line-height: 50px;
+    padding-top: 20px;
+    position: absolute !important;
+    right: 0;
+}
+
+.arrowGlyph60 {
+
+}
+
+.header {
+    position: fixed;
+    z-index: 9999;
+    top:0;
+    left:0;
+    right:0;
+    height: 50px;
+    line-height: 50px;
+    color: #b7ca15;
+    text-transform: uppercase;
+    text-align: center; 
+
+    background-color: #222 !important;
+    background-image: -webkit-gradient(linear, left top, left bottom, from( #222), to(#333)) !important; 
+    background-image: -webkit-linear-gradient(top, #222, #333) !important;
+    background-image:    -moz-linear-gradient(top, #222, #333) !important; 
+    background-image:      -o-linear-gradient(top, #222, #333) !important;
+    background-image:         linear-gradient(to bottom, #222, #333) !important; 
+
+    border-bottom: 2px #ce581b solid;
+}
+
+.fixfixed .header { 
+    position: absolute; 
+} 
+
+.connexionHeader {
+    background: URL('../images/logo.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-color: black !important;
+    border-bottom: 2px #ce581b solid;
+}
+
+.notHeader {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling: touch;
+    background-color: #FAF7E4;
+}
+
+.notHeaderConnexion {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling: touch;
+    background-color: #FAF7E4;
+}
+
+.view {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left:0;
+    right: 0; 
+    background-color: white !important;
+}
+
+.sectionPanel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:  white !important;
+/*    transition-duration: 0.3s;
+-webkit-transition-duration: 0.3s;*/
+}
+
+.row-title {
+    position:relative;
+    height: 60px;
+    line-height: 60px;
+    background-color: #D8404C;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 2px;
+}
+
+.loader {
+    background-image: url('../images/loader.gif');
+    background-size: 50px 50px;
+    background-color: black;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    opacity: 0.4;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.ticketRow, .actionRow {
+    border-bottom : 1px solid #1F263D;
+    border-top: none;
+    border-right: none;
+    border-top: left;
+
+    height: 60px;
+    line-height: 60px;
+    border-radius: 2px;
+    border-collapse: collapse;
+}
+
+#actionTab .actionRow:first-child {
+    border-top: 1px solid #1F263D !important;
+}
+
+.center {
+    display: block;
+/*    transform: translate3d(0%,0,0);
+-webkit-transform:translate3d(0%,0,0);*/
+}
+
+.left {
+    display: none;
+/*   transform: translate3d(-100%,0,0);
+-webkit-transform:translate3d(-100%,0,0);*/
+}
+
+.right {
+    display: none;
+/*    transform: translate3d(100%,0,0);
+-webkit-transform: translate3d(100%,0,0);*/
+}
+
+.back {
+    position: absolute !important;
+    top: 10px !important;
+    left: 15px !important;
+    z-index: 10000;
+    font-size: 22px;
+    color: #b7ca15 !important;
+    text-decoration: none !important;
+}
+
+.topNavBar {
+    position: absolute !important;
+    top: 5px !important;
+    left: 15px !important;
+    min-height: 35px !important;
+    border:none !important;
+    z-index: 99999;
+}
+
+.topNavBar .navbar-header {
+    background-color: black;
+}
+
+.topNavBar .navbar-toggle {
+    margin: 0;
+    border: 2px outset buttonface;
+    background-color: black !important;
+}
+
+.formPadding {
+    padding: 5px 10px;
+}
+
+.modal {
+    top:80px !important;
+}
+
+.etat {
+    float: left;
+    height: 60px;
+    line-height: 60px;
+    font-size: 30px;
+    padding-left: 0px !important;
+}
+
+.numero {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+}
+
+.date {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    text-align: right;
+}
+
+.description {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    font-style: italic;
+}
+
+.etatTrue {
+    color:#1F9C1F;;
+}
+
+.etatFalse {
+    color:#D33838;;
+}
+
+.actionDate {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.actionTime {
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    text-align: right;
+}
+
+.actionCommentaire {
+    float: left;
+    height: 30px;
+    line-height: 19px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    font-style: italic;
+}
+
+.actionCommentaireExpanded {
+    line-height: 19px;
+    font-style: italic;
+    min-height: 59px !important;
+}
+
+.actionCommentaireDetailed {
+    float: left;
+}
+
+
+.bottomBar31 {
+    position: fixed;
+    line-height: 31px;
+    height: 31px;
+    left: 0;
+    bottom: 34px;
+    right: 0;
+}
+
+.tabWithBottomBar31 {
+    padding-bottom: 31px;
+}
+
+.noRoundBorder {
+    border-radius: 0px !important;
+}
+
+.nav a {
+    cursor: pointer;
+}
+
+#ticketNavBar {
+    z-index: 99999;
+}
+
+#logoutIcon {
+    z-index: 99999;
+    position: absolute !important;
+    top: 10px !important;
+    right: 15px !important;  
+    min-height: 35px !important;
+    border:none !important;
+    font-size: 20px;
+    color: #b7ca15 !important;
+}
+
+#connexionFooter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    height: 35px;
+
+    background-color: #222 !important;
+    background-image: -webkit-gradient(linear, left top, left bottom, from( #222), to(#333)) !important; /* Chrome, Safari 4+ */
+    background-image: -webkit-linear-gradient(top, #222, #333) !important; /* Chrome 10-25, iOS 5+, Safari 5.1+ */
+    background-image:    -moz-linear-gradient(top, #222, #333) !important; /* Firefox 3.6-15 */
+    background-image:      -o-linear-gradient(top, #222, #333) !important; /* Opera 11.10-12.00 */
+    background-image:         linear-gradient(to bottom, #222, #333) !important; /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+
+    border-top: 2px #ce581b solid;
+
+    color: white;
+}
+
+.connexionFooterDiv {
+    height: 34px;
+    vertical-align: middle;
+    line-height: 34px;
+}
+
+#ticketNavFooter  {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    height: 35px;
+}
+
+#ticketNavFooter .ticketNavFooterButton {
+    background-color: #222 !important;
+    background-image: -webkit-gradient(linear, left top, left bottom, from( #222), to(#333)) !important; /* Chrome, Safari 4+ */
+    background-image: -webkit-linear-gradient(top, #222, #333) !important; /* Chrome 10-25, iOS 5+, Safari 5.1+ */
+    background-image:    -moz-linear-gradient(top, #222, #333) !important; /* Firefox 3.6-15 */
+    background-image:      -o-linear-gradient(top, #222, #333) !important; /* Opera 11.10-12.00 */
+    background-image:         linear-gradient(to bottom, #222, #333) !important; /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+
+    color: white;
+    text-shadow: none;
+    padding: 0;
+    height: 35px;
+    border-radius: 0;
+    border: none;
+    font-size: 11px;
+}
+
+.sectionPanelWithFooter {
+    bottom: 34px !important;
+}
+
+#ticketDetailsNavBar, #ticketListNavBar {
+    /*background-color: #f58134  ;*/
+
+    background-color: #b7ca15 ;
+}
+
+#ticketDetailsNavBar li {
+    /*width: 20%;*/
+    margin: 0;
+}
+
+.width20percent li {
+    width:20%;
+}
+
+.width25percent li {
+    width:25%;
+}
+
+#ticketDetailsNavBar li a, #ticketListNavBar li a {
+    text-align: center;
+    border-radius: 0;
+    color: white !important;
+}
+
+#ticketListNavBar li {
+    width: 25%;
+    margin: 0;
+}
+
+.navbar {
+    /*position:fixed !important;*/
+}
+
+
+#ticketMainNav {
+    background-color: #222 !important;
+    background-image: -webkit-gradient(linear, left top, left bottom, from( #222), to(#333)) !important; 
+    background-image: -webkit-linear-gradient(top, #222, #333) !important; 
+    background-image:    -moz-linear-gradient(top, #222, #333) !important;
+    background-image:      -o-linear-gradient(top, #222, #333) !important; 
+    background-image:         linear-gradient(to bottom, #222, #333) !important;
+/*    margin: 0 !important;
+border: 0 !important;*/
+height: 45px !important;
+}
+
+#ticketMainNav div, #ticketMainNav div ul, #ticketMainNav div ul li, #ticketMainNav div ul li a {
+    background-image: inherit !important;
+}
+
+#ticketMainNav .navbar-toggle {
+}
+
+#ticketMainNavButton {
+    position: absolute;
+    left: 10px;
+    outline-color: transparent !important;
+    /*display:block;*/
+}
+
+#ticketMainNavMenu.collapse {
+    /*display: none !important;*/
+}
+
+.navbar {
+    min-width: 360px;
+}
+
+.ticketNavFooterIconWrapper {
+    height:19px;
+    font-size: 16px;
+}
+
+.orangeFont {
+    color: #f58134 !important;
+}
+.greenFont {
+    color: #b7ca15 !important;
+}
+
+#ticketDetailsNavBar .badge {
+    color: white;
+    background-color: #222;
+    padding: 2px 4px;
+    
+}
+
+#ticketDetailsNavBar {
+    font-size :11px !important;
+}
+
+
+.typeUtilisateur {
+    float: left;
+    height: 60px;
+    line-height: 60px;
+    font-size: 30px;
+    padding-left: 0px !important;
+}
+
+.etatUtilisateur {
+
+}
+
+.etatGestionnaire {
+
+}
+
+.etatAdministrateur {
+
+}
+
+.prenomNom {
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+
+.email {
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+
+#ticketDetailsNavBar .navTabNoTicket {
+    color: grey !important;
+    cursor: default !important;
+
+}
+
+/*Typehead styles*/
+.tt-dropdown-menu {
+    width: 100%;
+}
+
+.tt-dropdown-menu > div > span.tt-suggestions > div > p {
+    background-color: #AAA;
+}
+
+
+
+#ticketListForm, .tab-content {
+    /*background-color : white !important;*/
+}
